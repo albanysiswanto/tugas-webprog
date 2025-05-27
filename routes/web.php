@@ -10,6 +10,9 @@ Route::get("/", function () {
     return view("welcome");
 });
 
+Route::post('/journal_entries', [JournalEntryController::class, 'store'])->name('journal_entries.store');
+Route::resource('journal_entries', JournalEntryController::class);
+
 Route::get("/dashboard", function () {
     $user = Auth::user();
     // Mengambil jurnal milik user yang login, diurutkan, dan dipaginasi 10 per halaman
