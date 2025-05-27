@@ -12,10 +12,10 @@ class JournalEntryController extends Controller
      */
     public function index()
     {
-        $journalEntries = JournalEntry::where('user_id', auth()->id())
-            ->orderBy('entry_date', 'desc')
+        $journalEntries = JournalEntry::where("user_id", auth()->id())
+            ->orderBy("entry_date", "desc")
             ->get();
-        return view('journal_entries.index', compact('journalEntries'));
+        return view("journal_entries.index", compact("journalEntries"));
     }
 
     /**
@@ -32,20 +32,21 @@ class JournalEntryController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'entry_date' => 'required|date',
+            "title" => "required|string|max:255",
+            "content" => "required|string",
+            "entry_date" => "required|date",
         ]);
 
         $journalEntry = new JournalEntry();
         $journalEntry->user_id = auth()->id();
-        $journalEntry->title = $validated['title'];
-        $journalEntry->content = $validated['content'];
-        $journalEntry->entry_date = $validated['entry_date'];
+        $journalEntry->title = $validated["title"];
+        $journalEntry->content = $validated["content"];
+        $journalEntry->entry_date = $validated["entry_date"];
         $journalEntry->save();
 
-        return redirect()->route('journal_entries.index')
-            ->with('success', 'Jurnal berhasil disimpan!');
+        return redirect()
+            ->route("dashboard")
+            ->with("success", "Jurnal berhasil disimpan!");
     }
 
     /**
@@ -54,9 +55,9 @@ class JournalEntryController extends Controller
     public function show(JournalEntry $journalEntry)
     {
         if ($journalEntry->user_id !== auth()->id()) {
-            abort(403, 'Unauthorized');
+            abort(403, "Unauthorized");
         }
-        return view('journal_entries.show', compact('journalEntry'));
+        return view("journal_entries.show", compact("journalEntry"));
     }
 
     /**
@@ -65,9 +66,9 @@ class JournalEntryController extends Controller
     public function edit(JournalEntry $journalEntry)
     {
         if ($journalEntry->user_id !== auth()->id()) {
-            abort(403, 'Unauthorized');
+            abort(403, "Unauthorized");
         }
-        return view('journal_entries.edit', compact('journalEntry'));
+        return view("journal_entries.edit", compact("journalEntry"));
     }
 
     /**
@@ -76,15 +77,17 @@ class JournalEntryController extends Controller
     public function update(Request $request, JournalEntry $journalEntry)
     {
         if ($journalEntry->user_id !== auth()->id()) {
-            abort(403, 'Unauthorized');
+            abort(403, "Unauthorized");
         }
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'entry_date' => 'required|date',
+            "title" => "required|string|max:255",
+            "content" => "required|string",
+            "entry_date" => "required|date",
         ]);
         $journalEntry->update($validated);
-        return redirect()->route('dashboard')->with('success', 'Jurnal berhasil diperbarui!');
+        return redirect()
+            ->route("dashboard")
+            ->with("success", "Jurnal berhasil diperbarui!");
     }
 
     /**
@@ -93,9 +96,11 @@ class JournalEntryController extends Controller
     public function destroy(JournalEntry $journalEntry)
     {
         if ($journalEntry->user_id !== auth()->id()) {
-            abort(403, 'Unauthorized');
+            abort(403, "Unauthorized");
         }
         $journalEntry->delete();
-        return redirect()->route('dashboard')->with('success', 'Jurnal berhasil dihapus!');
+        return redirect()
+            ->route("dashboard")
+            ->with("success", "Jurnal berhasil dihapus!");
     }
 }

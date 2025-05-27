@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             {{-- Outer card container - ini sudah memiliki dark mode dari Breeze --}}
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                {{-- Inner content area - ini yang perlu kita sesuaikan --}}
+
                 <div class="p-6 text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700">
 
                     <div class="mb-6 text-right">
@@ -17,6 +17,14 @@
                            class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-150 ease-in-out">
                             + Tulis Jurnal Baru
                         </a>
+                    </div>
+                    <div class="mb-6 text-left bg-green-600 text-white">
+                        @if(session('success'))
+                        <div class="mb-4 font-medium text-green-600">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+                        {{-- Inner content area - ini yang perlu kita sesuaikan --}}
                     </div>
 
                     @if ($journalEntries->count() > 0)
@@ -41,7 +49,7 @@
                                             Baca selengkapnya
                                             <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                         </a>
-                                        <div class="flex space-x-2">
+                                        <div class="flex space-x-2 gap-2">
                                             <a href="{{ route('journal-entries.edit', $entry->id) }}" class="text-yellow-500 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300">Edit</a> {{-- Pastikan route ini sudah ada --}}
                                             <form action="{{ route('journal-entries.destroy', $entry->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus jurnal ini?');"> {{-- Pastikan route ini sudah ada --}}
                                                 @csrf
