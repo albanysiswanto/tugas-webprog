@@ -1,61 +1,119 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Jurnal Pribadi (JurnalKu)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web Jurnal Pribadi sederhana yang dibangun menggunakan Laravel dan Tailwind CSS. Pengguna dapat mendaftar, login, dan membuat serta mengelola catatan jurnal pribadi mereka.
 
-## About Laravel
+## Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* **Autentikasi Pengguna:**
+    * Registrasi Pengguna Baru
+    * Login Pengguna
+    * Logout
+    * (Fitur dari Laravel Breeze seperti Lupa Password, Verifikasi Email juga tersedia)
+* **Dashboard Pengguna:**
+    * Menampilkan daftar entri jurnal milik pengguna yang sedang login.
+    * Pagination untuk daftar jurnal.
+* **Manajemen Jurnal (CRUD):**
+    * **Create:** Membuat entri jurnal baru (judul, isi, tanggal entri).
+    * **Read:** Melihat daftar jurnal dan detail masing-masing jurnal.
+    * **Update:** Mengedit entri jurnal yang sudah ada.
+    * **Delete:** Menghapus entri jurnal.
+* **Desain Responsif:** Dibuat dengan Tailwind CSS agar nyaman diakses di berbagai perangkat.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Teknologi yang Digunakan
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* **Backend:** Laravel (PHP Framework)
+* **Frontend:** Blade Templates, Tailwind CSS v3
+* **Asset Bundling:** Vite
+* **Database:** MySQL (atau database lain yang didukung Laravel, sesuai konfigurasi)
+* **Autentikasi:** Laravel Breeze
 
-## Learning Laravel
+## Prasyarat
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Sebelum memulai, pastikan sistem kamu memiliki:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* PHP (versi yang sesuai dengan Laravel yang kamu gunakan, misal >= 8.1)
+* Composer
+* Node.js dan NPM
+* Database Server (misalnya MySQL, MariaDB, PostgreSQL)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Instalasi dan Setup Lokal
 
-## Laravel Sponsors
+Berikut adalah langkah-langkah untuk menjalankan proyek ini di lingkungan lokal:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1.  **Clone Repository (Jika sudah ada di Git):**
+    ```bash
+    git clone https://github.com/albanysiswanto/tugas-webprog.git
+    cd tugas-webprog
+    ```
+    Jika belum, pastikan kamu berada di direktori proyekmu.
 
-### Premium Partners
+2.  **Install Dependensi Composer:**
+    ```bash
+    composer install
+    ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+3.  **Install Dependensi NPM:**
+    ```bash
+    npm install
+    ```
 
-## Contributing
+4.  **Buat File Environment (`.env`):**
+    Salin file `.env.example` menjadi `.env`.
+    ```bash
+    cp .env.example .env
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5.  **Generate Application Key:**
+    ```bash
+    php artisan key:generate
+    ```
 
-## Code of Conduct
+6.  **Konfigurasi Database di `.env`:**
+    Buka file `.env` dan sesuaikan pengaturan database berikut dengan konfigurasimu:
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=nama_database_kamu
+    DB_USERNAME=username_database_kamu
+    DB_PASSWORD=password_database_kamu
+    ```
+    Pastikan kamu sudah membuat database `nama_database_kamu` di server database-mu.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+7.  **Jalankan Migrasi Database:**
+    Perintah ini akan membuat tabel-tabel yang dibutuhkan (seperti `users`, `password_reset_tokens`, `journal_entries`, dll.) di database-mu.
+    ```bash
+    php artisan migrate
+    ```
 
-## Security Vulnerabilities
+8.  **(Opsional) Jalankan Database Seeder:**
+    Jika kamu memiliki seeder untuk data awal (misalnya, user admin atau data dummy).
+    ```bash
+    php artisan db:seed
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+9.  **Compile Aset Frontend:**
+    Untuk pengembangan (dengan hot-reloading):
+    ```bash
+    npm run dev
+    ```
+    Untuk build produksi:
+    ```bash
+    npm run build
+    ```
 
-## License
+10. **Jalankan Server Pengembangan Laravel:**
+    Di terminal lain (biarkan `npm run dev` tetap berjalan jika dalam mode pengembangan):
+    ```bash
+    php artisan serve
+    ```
+    Aplikasi akan tersedia di `http://localhost:8000` (atau port lain yang ditampilkan).
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Cara Penggunaan
+
+1.  Buka aplikasi di browser.
+2.  **Register:** Buat akun baru melalui halaman registrasi.
+3.  **Login:** Masuk menggunakan akun yang sudah terdaftar.
+4.  **Dashboard:** Setelah login, kamu akan diarahkan ke dashboard di mana kamu bisa melihat daftar jurnalmu.
+5.  **Buat Jurnal:** Klik tombol "Tulis Jurnal Baru" untuk menambahkan entri jurnal.
+6.  **Lihat, Edit, Hapus Jurnal:** Dari daftar jurnal, kamu bisa melihat detail, mengedit, atau menghapus jurnal yang ada.
