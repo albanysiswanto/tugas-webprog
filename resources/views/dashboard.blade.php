@@ -18,7 +18,7 @@
                             + Tulis Jurnal Baru
                         </a>
                     </div>
-                    <div class="mb-6 text-left bg-green-600 text-white">
+                    <div class="mb-6 text-left">
                         @if(session('success'))
                         <div class="mb-4 font-medium text-green-600">
                             {{ session('success') }}

@@ -22,9 +22,7 @@ class User extends Authenticatable
 
     public function journalEntries(): HasMany
     {
-        // Tentukan tipe kembalian
-        // Tentukan tipe kembalian
-        return $this->hasMany(JournalEntry::class, "user_id"); // 'user_id' adalah foreign key di tabel journal_entries
+        return $this->hasMany(JournalEntry::class, "user_id");
     }
 
     /**

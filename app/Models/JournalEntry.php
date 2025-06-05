@@ -15,7 +15,7 @@ class JournalEntry extends Model
      *
      * @var string
      */
-    protected $table = "journal_entries"; // Nama tabel di database
+    protected $table = "journal_entries";
 
     /**
      * The attributes that are mass assignable.
